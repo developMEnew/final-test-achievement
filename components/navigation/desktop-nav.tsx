@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation';
 import { LayoutDashboard, Settings, Users, BarChart3, Calendar } from 'lucide-react';
 import { AuthButton } from './auth-button';
 import { UserNav } from './user-nav';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -18,7 +20,16 @@ const navigation = [
 export function DesktopNav() {
   const pathname = usePathname();
   // TODO: Replace with actual auth state
-  const isAuthenticated = false;
+  const { status } = useSession();
+  const [isAuthenticated , setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, [status]);;
 
   return (
     <nav className="hidden md:flex px-4 h-16 items-center justify-between border-b bg-background">
