@@ -33,7 +33,7 @@ export function MobileNav() {
 
   return (
     <>
-      <div className="md:hidden h-14 flex items-center justify-between px-4 border-b bg-background">
+      <div className="md:hidden h-14 flex items-center justify-between px-4 border-b bg-background fixed top-0 left-0 right-0">
         <h1 className="text-lg font-semibold">
           {navigation.find((item) => item.href === pathname)?.name || 'Dashboard'}
         </h1>
